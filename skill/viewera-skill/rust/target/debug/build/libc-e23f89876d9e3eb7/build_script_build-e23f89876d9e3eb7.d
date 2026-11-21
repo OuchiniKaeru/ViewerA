@@ -1,0 +1,5 @@
+/home/soashi/Documents/file-viewer-pj/skill/viewera-skill/rust/target/debug/build/libc-e23f89876d9e3eb7/build_script_build-e23f89876d9e3eb7.d: /home/soashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191/build.rs
+
+/home/soashi/Documents/file-viewer-pj/skill/viewera-skill/rust/target/debug/build/libc-e23f89876d9e3eb7/build_script_build-e23f89876d9e3eb7: /home/soashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191/build.rs
+
+/home/soashi/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191/build.rs:

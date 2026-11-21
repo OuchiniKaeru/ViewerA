@@ -36,9 +36,9 @@ FrontendとAgent Host Clientのテスト:
 
 ```sh
 npm test
-node --test integrations/node/tests/*.test.mjs
-python3 -m unittest discover -s integrations/python/tests -v
-cargo test --manifest-path integrations/rust/Cargo.toml
+node --test skill/viewera-skill/node/tests/*.test.mjs
+python3 -m unittest discover -s skill/viewera-skill/python/tests -v
+cargo test --manifest-path skill/viewera-skill/rust/Cargo.toml
 ```
 
 Node.jsは開発・ビルド時だけ必要です。配布アプリは静的Frontendを内包し、Python、Node.js、LibreOfficeを実行時依存としません。LinuxデスクトップではWebKitGTK等のOS共有ライブラリが必要です。
@@ -81,7 +81,7 @@ viewera --help
 viewera agent-return --help
 ```
 
-Agent Host IntegrationのPython / Rust / Node.js / PowerShell例、Receipt、エラー処理は[`integrations/README.md`](./integrations/README.md)を参照してください。
+Agent Host IntegrationのPython / Rust / Node.js / PowerShell例、Receipt、エラー処理は[`skill/viewera-skill/SKILL.md`](./skill/viewera-skill/SKILL.md)を参照してください。
 
 ## Agent Return
 
@@ -93,10 +93,12 @@ viewera agent-return \
   --receipt "/path/to/agent-inbox/receipts/request.receipt.json"
 ```
 
-Python向け標準ライブラリClientは[`integrations/python/file_viewer_client.py`](./integrations/python/file_viewer_client.py)、JSON Schemaは[`integrations/schema/agent-return-v1.schema.json`](./integrations/schema/agent-return-v1.schema.json)です。Clientの実行例:
+Python向け標準ライブラリClientは[`skill/viewera-skill/python/file_viewer_client.py`](./skill/viewera-skill/python/file_viewer_client.py)、JSON Schemaは[`skill/viewera-skill/schema/agent-return-v1.schema.json`](./skill/viewera-skill/schema/agent-return-v1.schema.json)です。Clientの実行例:
 
 ```python
-from integrations.python.file_viewer_client import FileViewerClient
+import sys
+sys.path.insert(0, "skill/viewera-skill/python")
+from file_viewer_client import FileViewerClient
 
 client = FileViewerClient()
 result = client.open_files(
