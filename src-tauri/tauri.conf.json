@@ -31,7 +31,7 @@
     "active": true,
     "resources": [
       "../THIRD_PARTY_NOTICES.md",
-      "../skill/viewera-skill/SKILL.md"
+      "../skills/viewera-skill/SKILL.md"
     ],
     "icon": ["icons/icon.png", "icons/icon.ico", "icons/icon.icns"],
     "targets": ["deb", "appimage", "nsis", "msi"],
