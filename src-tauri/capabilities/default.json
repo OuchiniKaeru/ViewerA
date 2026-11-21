@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Allow the bundled File Viewer frontend to call its registered backend commands.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

@@ -1,0 +1,27 @@
+# Dependencies / build artifacts
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/schemas/
+
+# Vite / tooling caches
+.vite/
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Local-only documents (not for distribution)
+THIRD_PARTY_NOTICES.md
+rust_standalone_file_viewer_implementation_spec_v2.md

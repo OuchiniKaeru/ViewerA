@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:file-viewer:schemas:agent-return-v1",
+  "title": "File Viewer Agent Return v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_id", "source", "run", "viewer"],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform"],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "agent_id": {
+          "type": ["string", "null"]
+        },
+        "agent_name": {
+          "type": ["string", "null"]
+        },
+        "run_id": {
+          "type": ["string", "null"]
+        },
+        "session_id": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "const": "completed"
+        },
+        "completed_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      }
+    },
+    "viewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action"],
+      "properties": {
+        "action": {
+          "enum": ["none", "open_artifacts", "open_first", "open_folder", "show_message"]
+        },
+        "selection": {
+          "enum": ["first", "none", null]
+        },
+        "focus": {
+          "type": "boolean"
+        },
+        "open_preview": {
+          "type": "boolean"
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_id", "kind", "path"],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": {
+            "const": "file"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32768
+          },
+          "name": {
+            "type": ["string", "null"]
+          },
+          "mime_type": {
+            "type": ["string", "null"]
+          },
+          "size": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "result": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["text"],
+      "properties": {
+        "text": {
+          "type": "string",
+          "maxLength": 32768
+        },
+        "content_type": {
+          "enum": ["text", "markdown"]
+        }
+      }
+    },
+    "auth": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["scheme", "key_id", "issued_at", "nonce", "signature"],
+      "properties": {
+        "scheme": {
+          "type": "string"
+        },
+        "key_id": {
+          "type": "string"
+        },
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "viewer": {
+            "properties": {
+              "action": {
+                "enum": ["open_artifacts", "open_first", "open_folder"]
+              }
+            },
+            "required": ["action"]
+          }
+        },
+        "required": ["viewer"]
+      },
+      "then": {
+        "properties": {
+          "artifacts": {
+            "minItems": 1
+          }
+        },
+        "required": ["artifacts"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "viewer": {
+            "properties": {
+              "action": {
+                "const": "show_message"
+              }
+            },
+            "required": ["action"]
+          }
+        },
+        "required": ["viewer"]
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "minLength": 1
+              }
+            },
+            "required": ["text"]
+          }
+        },
+        "required": ["result"]
+      }
+    }
+  ]
+}

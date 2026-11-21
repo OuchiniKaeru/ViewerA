@@ -1,0 +1,43 @@
+[package]
+name = "viewera"
+version = "0.1.0"
+description = "ViewerA - standalone local file viewer"
+authors = ["ViewerA contributors"]
+edition = "2024"
+rust-version = "1.90"
+
+[lib]
+name = "viewera_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+calamine = "0.38"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4", features = ["derive"] }
+csv = "1"
+encoding_rs = "0.8"
+hmac = "0.12"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "webp", "bmp"] }
+natord = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+subtle = "2"
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2.7.3"
+tauri-plugin-single-instance = "2"
+thiserror = "2"
+tokio = { version = "1", features = ["fs", "sync", "time", "rt-multi-thread"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+zip = { version = "6", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+tempfile = "3"
